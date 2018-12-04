@@ -5,77 +5,77 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 data class WeatherList(
-    val count: Int,
-    val list: List<WeatherItem>,
-    val message: String
+    var count: Int,
+    var list: List<WeatherItem>,
+    var message: String
 )
 
 @Parcelize
 data class WeatherItem(
     @SerializedName("coord")
-    val coordinate: Coordinate,
+    var coordinate: Coordinate,
     @SerializedName("dt")
-    val dt: Int,
+    var dt: Int,
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
     @SerializedName("main")
-    val forecast: Forecast,
+    var forecast: Forecast,
     @SerializedName("name")
-    val city: String,
+    var city: String,
     @SerializedName("sys")
-    val country: Country,
+    var country: Country,
     @SerializedName("weather")
-    val weather: List<Weather>,
+    var weather: List<Weather>,
     @SerializedName("wind")
-    val wind: Wind
+    var wind: Wind
 ) : Parcelable
 
 @Parcelize
 data class Forecast(
     @SerializedName("humidity")
-    val humidity: Double,
+    var humidity: Double,
     @SerializedName("pressure")
-    val pressure: Double,
+    var pressure: Double,
     @SerializedName("temp")
-    val temperature: Double,
+    var temperature: Double,
     @SerializedName("temp_max")
-    val maxTemperature: Double,
+    var maxTemperature: Double,
     @SerializedName("temp_min")
-    val minTemperature: Double
+    var minTemperature: Double
 ) : Parcelable
 
 @Parcelize
 data class Country(
     @SerializedName("country")
-    val name: String
+    var name: String
 ) : Parcelable
 
 @Parcelize
 data class Weather(
     @SerializedName("description")
-    val description: String,
+    var description: String,
     @SerializedName("icon")
-    val icon: String,
+    var icon: String,
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
     @SerializedName("main")
-    val main: String
+    var main: String
 ) : Parcelable
 
 @Parcelize
 data class Wind(
     @SerializedName("deg")
-    val degree: Double,
+    var degree: Double,
     @SerializedName("gust")
-    val gust: Double,
+    var gust: Double,
     @SerializedName("speed")
-    val speed: Double
+    var speed: Double
 ) : Parcelable
 
 @Parcelize
 data class Coordinate(
     @SerializedName("lat")
-    val latitude: Double,
+    var latitude: Double,
     @SerializedName("lon")
-    val longitude: Double
+    var longitude: Double
 ) : Parcelable

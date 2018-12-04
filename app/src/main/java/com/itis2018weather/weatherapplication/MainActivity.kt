@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_CODE = 1
@@ -52,10 +53,10 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation.addOnSuccessListener {
             currentLongtitude = it.longitude.toString()
             currentLatitude = it.latitude.toString()
-            getWeatherList()
+            submitWeatherList()
         }
 
-    fun getWeatherList() {
+    fun submitWeatherList() {
         val apiService = WeatherApiService.create()
         apiService.getWeatherOfNearCities(currentLatitude, currentLongtitude)
             .enqueue(object : Callback<WeatherList> {
@@ -65,7 +66,6 @@ class MainActivity : AppCompatActivity() {
                         adapter.submitList(weatherList)
                     }
                 }
-
                 override fun onFailure(call: Call<WeatherList>?, t: Throwable?) {
                     Toast.makeText(this@MainActivity, t.toString(), Toast.LENGTH_LONG).show()
                 }
@@ -78,11 +78,10 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         when (requestCode) {
-            PERMISSION_REQUEST_CODE -> {
+            PERMISSION_REQUEST_CODE ->
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED))
                     getCurrentLocation()
-                else getWeatherList()
-            }
+                else submitWeatherList()
         }
     }
 }

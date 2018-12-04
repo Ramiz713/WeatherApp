@@ -17,17 +17,16 @@ class WeatherAdapter(private val listener: (Int) -> Unit) :
                 .inflate(R.layout.weather_item, parent, false)
         )
 
-    override fun onBindViewHolder(holder: CityHolder, position: Int) =
-        holder.bind(getItem(position), listener)
+    override fun onBindViewHolder(holder: CityHolder, position: Int) {
+        holder.bind(getItem(position))
+        holder.itemView.setOnClickListener { listener(position) }
+    }
 
     class CityHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(item: WeatherItem, listener: (Int) -> Unit) = with(containerView) {
-            weather_city.text = item.city
-            weather_country.text = if (item.country.name.isEmpty()) "Russia" else item.country.name
-            weather_tmp.text = "${item.forecast.temperature}°C"
-            setOnClickListener {
-                listener(adapterPosition)
-            }
+        fun bind(item: WeatherItem) = with(item) {
+            weather_city.text = city
+            weather_country.text = if (country.name.isEmpty()) "Russia" else country.name
+            weather_tmp.text = "${forecast.temperature}°C"
         }
     }
 }

@@ -16,27 +16,25 @@ interface WeatherApiService {
     ): Call<WeatherList>
 
     companion object ApiFactory {
-        private const val API_KEY = "77162a45807634e649058bebdd63141f"
-        fun create(): WeatherApiService {
-            val client = OkHttpClient.Builder()
-                .addInterceptor {
-                    val url = it.request()
-                        .url()
-                        .newBuilder()
-                        .addQueryParameter("appid", API_KEY)
-                        .addQueryParameter("units", "metric")
-                        .addQueryParameter("cnt", "20")
-                        .build()
-                    val request = it.request().newBuilder().url(url).build()
-                    it.proceed(request)
-                }.build()
-            return Retrofit.Builder()
+        fun create(): WeatherApiService = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://api.openweathermap.org/data/2.5/")
-                .client(client)
+            .baseUrl(BuildConfig.API_BASE_URL)
+            .client(buildClient())
                 .build()
                 .create(WeatherApiService::class.java)
-        }
+
+        private fun buildClient(): OkHttpClient = OkHttpClient.Builder()
+            .addInterceptor {
+                val url = it.request()
+                    .url()
+                    .newBuilder()
+                    .addQueryParameter("appid", BuildConfig.API_KEY)
+                    .addQueryParameter("units", BuildConfig.API_UNIT_METRIC)
+                    .addQueryParameter("cnt", BuildConfig.API_DEFAULT_CITIES_COUNT)
+                    .build()
+                val request = it.request().newBuilder().url(url).build()
+                it.proceed(request)
+            }.build()
     }
 }
