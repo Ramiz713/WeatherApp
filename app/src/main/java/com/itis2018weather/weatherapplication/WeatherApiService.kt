@@ -16,13 +16,16 @@ interface WeatherApiService {
     ): Call<WeatherList>
 
     companion object ApiFactory {
+        private const val API_DEFAULT_CITIES_COUNT = "20"
+        private const val API_UNIT_METRIC = "metric"
+
         fun create(): WeatherApiService = Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BuildConfig.API_BASE_URL)
             .client(buildClient())
-                .build()
-                .create(WeatherApiService::class.java)
+            .build()
+            .create(WeatherApiService::class.java)
 
         private fun buildClient(): OkHttpClient = OkHttpClient.Builder()
             .addInterceptor {
@@ -30,8 +33,8 @@ interface WeatherApiService {
                     .url()
                     .newBuilder()
                     .addQueryParameter("appid", BuildConfig.API_KEY)
-                    .addQueryParameter("units", BuildConfig.API_UNIT_METRIC)
-                    .addQueryParameter("cnt", BuildConfig.API_DEFAULT_CITIES_COUNT)
+                    .addQueryParameter("units", API_UNIT_METRIC)
+                    .addQueryParameter("cnt", API_DEFAULT_CITIES_COUNT)
                     .build()
                 val request = it.request().newBuilder().url(url).build()
                 it.proceed(request)

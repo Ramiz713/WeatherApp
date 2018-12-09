@@ -14,11 +14,11 @@ class WeatherInfoActivity : AppCompatActivity() {
         val weatherItem = intent.getParcelableExtra<WeatherItem>("Weather item")
         weather_city.text = weatherItem.city
         weather_descr.text = weatherItem.weather.first().description
-        weather_temp.text = "${weatherItem.forecast.temperature}°C"
-        weather_pressure.text = "Pressure: ${weatherItem.forecast.pressure} hPa"
-        weather_humidity.text = "Humidity: ${weatherItem.forecast.humidity}%"
+        weather_temp.text = getString(R.string.temperature_metric, weatherItem.forecast.temperature.toString())
+        weather_pressure.text = getString(R.string.pressure, weatherItem.forecast.pressure.toString())
+        weather_humidity.text = getString(R.string.humidity, weatherItem.forecast.pressure.toString())
         val wind = weatherItem.wind
-        weather_wind_degree.text = "Wind degree: ${wind.degree}°"
-        weather_wind_speed.text = "Wind speed: ${wind.speed} mps"
+        weather_wind_degree.text = getString(R.string.windDegree, wind.degree.toString())
+        weather_wind_speed.text = getString(R.string.windSpeed, wind.speed.toString())
     }
 }

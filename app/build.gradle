@@ -18,15 +18,11 @@ android {
         debug{
             buildConfigField "String", 'API_KEY', '"77162a45807634e649058bebdd63141f"'
             buildConfigField "String", 'API_BASE_URL', '"http://api.openweathermap.org/data/2.5/"'
-            buildConfigField "String", 'API_UNIT_METRIC', '"metric"'
-            buildConfigField "String", 'API_DEFAULT_CITIES_COUNT', '"20"'
         }
 
         release {
             buildConfigField "String", 'API_KEY', '"77162a45807634e649058bebdd63141f"'
             buildConfigField "String", 'API_BASE_URL', '"http://api.openweathermap.org/data/2.5/"'
-            buildConfigField "String", 'API_UNIT_METRIC', '"metric"'
-            buildConfigField "String", 'API_DEFAULT_CITIES_COUNT', '"20"'
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
