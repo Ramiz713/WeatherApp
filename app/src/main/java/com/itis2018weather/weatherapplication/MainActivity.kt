@@ -1,6 +1,7 @@
 package com.itis2018weather.weatherapplication
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -55,16 +56,17 @@ class MainActivity : AppCompatActivity() {
             submitWeatherList()
         }
 
+    @SuppressLint("CheckResult")
     private fun submitWeatherList() {
         val db = WeatherDatabase.getInstance(this)
         val weatherDao = db?.weatherDao()
         val apiService = WeatherApiService.create(this)
-        val result = apiService.getWeatherOfNearCities(currentLatitude, currentLongtitude)
+        apiService.getWeatherOfNearCities(currentLatitude, currentLongtitude)
             .subscribeOn(Schedulers.io())
             .map { it.list }
             .doOnSuccess {
-                    weatherDao?.deleteAll()
-                    weatherDao?.insertAll(it)
+                weatherDao?.deleteAll()
+                weatherDao?.insertAll(it)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
