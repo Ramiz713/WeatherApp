@@ -59,19 +59,14 @@ class MainActivity : AppCompatActivity() {
         val db = WeatherDatabase.getInstance(this)
         val weatherDao = db?.weatherDao()
         val apiService = WeatherApiService.create(this)
-        apiService.getWeatherOfNearCities(currentLatitude, currentLongtitude)
-            .observeOn(AndroidSchedulers.mainThread())
+        val result = apiService.getWeatherOfNearCities(currentLatitude, currentLongtitude)
             .subscribeOn(Schedulers.io())
             .map { it.list }
             .doOnSuccess {
-                Completable.fromAction {
                     weatherDao?.deleteAll()
                     weatherDao?.insertAll(it)
-                }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe()
             }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
                     weatherList.addAll(result)
