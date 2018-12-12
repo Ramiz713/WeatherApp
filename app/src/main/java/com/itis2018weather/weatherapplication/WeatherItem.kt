@@ -1,5 +1,9 @@
 package com.itis2018weather.weatherapplication
 
+import android.arch.persistence.room.Embedded
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.TypeConverters
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -11,24 +15,33 @@ data class WeatherList(
 )
 
 @Parcelize
+@Entity(tableName = "weather_data")
 data class WeatherItem(
     @SerializedName("coord")
+    @Embedded
     var coordinate: Coordinate,
     @SerializedName("dt")
     var dt: Int,
     @SerializedName("id")
+    @PrimaryKey
     var id: Int,
     @SerializedName("main")
+    @Embedded
     var forecast: Forecast,
     @SerializedName("name")
     var city: String,
     @SerializedName("sys")
+    @Embedded
     var country: Country,
     @SerializedName("weather")
+    @TypeConverters(WeatherConverter::class)
     var weather: List<Weather>,
     @SerializedName("wind")
+    @Embedded
     var wind: Wind
-) : Parcelable
+) : Parcelable {
+    constructor() : this(Coordinate(), 0, 0, Forecast(), "", Country(), ArrayList(), Wind())
+}
 
 @Parcelize
 data class Forecast(
@@ -42,13 +55,17 @@ data class Forecast(
     var maxTemperature: Double,
     @SerializedName("temp_min")
     var minTemperature: Double
-) : Parcelable
+) : Parcelable {
+    constructor() : this(0.0, 0.0, 0.0, 0.0, 0.0)
+}
 
 @Parcelize
 data class Country(
     @SerializedName("country")
     var name: String
-) : Parcelable
+) : Parcelable {
+    constructor() : this("")
+}
 
 @Parcelize
 data class Weather(
@@ -70,7 +87,9 @@ data class Wind(
     var gust: Double,
     @SerializedName("speed")
     var speed: Double
-) : Parcelable
+) : Parcelable {
+    constructor() : this(0.0, 0.0, 0.0)
+}
 
 @Parcelize
 data class Coordinate(
@@ -78,4 +97,6 @@ data class Coordinate(
     var latitude: Double,
     @SerializedName("lon")
     var longitude: Double
-) : Parcelable
+) : Parcelable {
+    constructor() : this(0.0, 0.0)
+}

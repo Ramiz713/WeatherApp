@@ -1,6 +1,7 @@
 package com.itis2018weather.weatherapplication
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -11,11 +12,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_CODE = 1
@@ -56,20 +56,34 @@ class MainActivity : AppCompatActivity() {
             submitWeatherList()
         }
 
-    fun submitWeatherList() {
-        val apiService = WeatherApiService.create()
+    @SuppressLint("CheckResult")
+    private fun submitWeatherList() {
+        val db = WeatherDatabase.getInstance(this)
+        val weatherDao = db?.weatherDao()
+        val apiService = WeatherApiService.create(this)
         apiService.getWeatherOfNearCities(currentLatitude, currentLongtitude)
-            .enqueue(object : Callback<WeatherList> {
-                override fun onResponse(call: Call<WeatherList>?, response: Response<WeatherList>?) {
-                    if (response != null && response.isSuccessful && response.body() != null) {
-                        weatherList.addAll(response.body()?.list ?: ArrayList())
-                        adapter.submitList(weatherList)
+            .subscribeOn(Schedulers.io())
+            .map { it.list }
+            .doOnSuccess {
+                weatherDao?.deleteAll()
+                weatherDao?.insertAll(it)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    weatherList.addAll(result)
+                    adapter.submitList(weatherList)
+                },
+                { error ->
+                    Toast.makeText(this, error.message, Toast.LENGTH_LONG).show()
+                    Completable.fromCallable {
+                        weatherList.addAll(weatherDao?.getAll() ?: ArrayList())
                     }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe { adapter.submitList(weatherList) }
                 }
-                override fun onFailure(call: Call<WeatherList>?, t: Throwable?) {
-                    Toast.makeText(this@MainActivity, t.toString(), Toast.LENGTH_LONG).show()
-                }
-            })
+            )
     }
 
     override fun onRequestPermissionsResult(
