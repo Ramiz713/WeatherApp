@@ -37,6 +37,7 @@ interface WeatherApiService {
                         .addQueryParameter("appid", BuildConfig.API_KEY)
                         .addQueryParameter("units", API_UNIT_METRIC)
                         .addQueryParameter("cnt", API_DEFAULT_CITIES_COUNT)
+                        .addQueryParameter("lang", context.getString(R.string.country_code))
                         .build()
                     val request = it.request().newBuilder().url(url).build()
                     it.proceed(request)

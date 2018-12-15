@@ -24,9 +24,10 @@ class WeatherAdapter(private val listener: (Int) -> Unit) :
 
     class CityHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(item: WeatherItem) = with(item) {
-            weather_city.text = city
-            weather_country.text = if (country.name.isEmpty()) "Russia" else country.name
-            weather_tmp.text = "${forecast.temperature}°C"
+            val context = containerView.context
+            text_city.text = city
+            weather_country.text = if (country.name.isEmpty()) context.getString(R.string.country) else country.name
+            weather_tmp.text = context.getString(R.string.temperature_metric, forecast.temperature)
         }
     }
 }

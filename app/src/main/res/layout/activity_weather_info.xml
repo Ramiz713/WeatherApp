@@ -9,7 +9,7 @@
 
     <TextView
             android:layout_marginTop="28dp"
-            android:id="@+id/weather_city"
+            android:id="@+id/text_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gs_bold"
@@ -20,110 +20,118 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
-            android:id="@+id/weather_descr"
+            android:id="@+id/text_short_descr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gs_medium"
             android:textSize="24sp"
             android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/weather_city"
+            app:layout_constraintTop_toBottomOf="@id/text_city"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
             android:layout_marginTop="8dp"
-            android:id="@+id/weather_temp"
+            android:id="@+id/text_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gs_regular"
             android:textSize="64sp"
             android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/weather_descr"
+            app:layout_constraintTop_toBottomOf="@id/text_short_descr"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 
     <ImageView
-            android:id="@id/weather_image"
+            android:id="@id/image_weather_icon"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
             android:src="@drawable/weather_default"
-            app:layout_constraintTop_toBottomOf="@id/weather_temp"
+            app:layout_constraintTop_toBottomOf="@id/text_temperature"
             app:layout_constraintLeft_toLeftOf="@id/line_left"
             app:layout_constraintRight_toRightOf="@id/line_right"/>
 
     <ImageView
-            android:id="@+id/pressure_image"
+            android:id="@+id/image_pressure"
             android:layout_width="0dp"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toBottomOf="@id/weather_image"
+            app:layout_constraintTop_toBottomOf="@id/image_weather_icon"
             android:src="@drawable/ic_wi_barometer"
-            app:layout_constraintBottom_toBottomOf="@id/weather_pressure"
+            app:layout_constraintBottom_toBottomOf="@id/text_pressure"
             app:layout_constraintRight_toRightOf="@id/line_weather_info"
             android:layout_height="0dp"/>
 
     <TextView
-            android:id="@+id/weather_pressure"
+            android:id="@+id/text_pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@id/line_weather_info"
-            app:layout_constraintTop_toBottomOf="@id/weather_image"
+            app:layout_constraintTop_toBottomOf="@id/image_weather_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             android:fontFamily="@font/gs_regular"
             android:textSize="24sp"/>
 
     <ImageView
-            android:id="@+id/humidity_image"
+            android:id="@+id/image_humidity"
             android:layout_width="0dp"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toBottomOf="@id/weather_pressure"
+            app:layout_constraintTop_toBottomOf="@id/text_pressure"
             android:src="@drawable/ic_wi_humidity"
-            app:layout_constraintBottom_toBottomOf="@id/weather_humidity"
+            app:layout_constraintBottom_toBottomOf="@id/text_humidity"
             app:layout_constraintRight_toRightOf="@id/line_weather_info"
             android:layout_height="0dp"/>
 
     <TextView
-            android:id="@+id/weather_humidity"
+            android:id="@+id/text_humidity"
             android:layout_width="wrap_content"
             app:layout_constraintLeft_toLeftOf="@id/line_weather_info"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/weather_pressure"
+            app:layout_constraintTop_toBottomOf="@id/text_pressure"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             android:fontFamily="@font/gs_regular"
             android:textSize="24sp"/>
 
     <ImageView
-            android:id="@+id/wind_degree_image"
+            android:id="@+id/image_wind_degree"
             android:layout_width="0dp"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toBottomOf="@id/weather_humidity"
+            app:layout_constraintTop_toBottomOf="@id/text_humidity"
             android:src="@drawable/ic_wi_wind_deg"
-            app:layout_constraintBottom_toBottomOf="@id/weather_wind_degree"
+            app:layout_constraintBottom_toBottomOf="@id/text_wind_degree"
             app:layout_constraintRight_toRightOf="@id/line_weather_info"
             android:layout_height="0dp"/>
 
     <TextView
-            android:id="@+id/weather_wind_degree"
+            android:id="@+id/text_wind_degree"
             android:layout_width="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/weather_humidity"
+            app:layout_constraintTop_toBottomOf="@id/text_humidity"
             app:layout_constraintLeft_toLeftOf="@id/line_weather_info"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gs_regular"
             android:textSize="24sp"/>
 
     <ImageView
-            android:id="@+id/wind_speed_image"
+            android:id="@+id/image_wind_speed"
             android:layout_width="0dp"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toBottomOf="@id/weather_wind_degree"
+            app:layout_constraintTop_toBottomOf="@id/text_wind_degree"
             android:src="@drawable/ic_wi_windy"
-            app:layout_constraintBottom_toBottomOf="@id/weather_wind_speed"
+            app:layout_constraintBottom_toBottomOf="@id/text_wind_speed"
             app:layout_constraintRight_toRightOf="@id/line_weather_info"
             android:layout_height="0dp"/>
 
     <TextView
-            android:id="@+id/weather_wind_speed"
+            android:id="@+id/text_wind_speed"
             android:layout_width="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/weather_wind_degree"
+            app:layout_constraintTop_toBottomOf="@id/text_wind_degree"
             app:layout_constraintLeft_toLeftOf="@id/line_weather_info"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintRight_toRightOf="parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gs_regular"
             android:textSize="24sp"/>
@@ -147,6 +155,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.17"/>
+            app:layout_constraintGuide_percent="0.15"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -12,7 +12,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import io.reactivex.Completable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,19 +56,21 @@ class MainActivity : AppCompatActivity() {
             submitWeatherList()
         }
 
+    fun <T> Single<T>.subscribeSingleOnIoObserveOnUi(): Single<T> =
+        subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+
     @SuppressLint("CheckResult")
     private fun submitWeatherList() {
         val db = WeatherDatabase.getInstance(this)
         val weatherDao = db?.weatherDao()
         val apiService = WeatherApiService.create(this)
         apiService.getWeatherOfNearCities(currentLatitude, currentLongtitude)
-            .subscribeOn(Schedulers.io())
             .map { it.list }
             .doOnSuccess {
                 weatherDao?.deleteAll()
                 weatherDao?.insertAll(it)
             }
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeSingleOnIoObserveOnUi()
             .subscribe(
                 { result ->
                     weatherList.addAll(result)
@@ -76,12 +78,12 @@ class MainActivity : AppCompatActivity() {
                 },
                 { error ->
                     Toast.makeText(this, error.message, Toast.LENGTH_LONG).show()
-                    Completable.fromCallable {
+                    Single.fromCallable {
                         weatherList.addAll(weatherDao?.getAll() ?: ArrayList())
                     }
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe { adapter.submitList(weatherList) }
+                        .subscribeSingleOnIoObserveOnUi()
+                        .doAfterSuccess { adapter.submitList(weatherList) }
+                        .subscribe()
                 }
             )
     }
