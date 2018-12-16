@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.TypeConverters
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.itis2018weather.weatherapplication.database.WeatherConverter
 import kotlinx.android.parcel.Parcelize
 
 data class WeatherList(

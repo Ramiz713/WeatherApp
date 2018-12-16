@@ -1,10 +1,12 @@
-package com.itis2018weather.weatherapplication
+package com.itis2018weather.weatherapplication.adapter
 
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.itis2018weather.weatherapplication.R
+import com.itis2018weather.weatherapplication.WeatherItem
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.weather_item.*
 

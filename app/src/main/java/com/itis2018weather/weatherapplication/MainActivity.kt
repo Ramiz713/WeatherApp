@@ -12,9 +12,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.itis2018weather.weatherapplication.adapter.WeatherAdapter
+import com.itis2018weather.weatherapplication.database.WeatherDatabase
+import io.reactivex.Completable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -56,9 +56,6 @@ class MainActivity : AppCompatActivity() {
             submitWeatherList()
         }
 
-    fun <T> Single<T>.subscribeSingleOnIoObserveOnUi(): Single<T> =
-        subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-
     @SuppressLint("CheckResult")
     private fun submitWeatherList() {
         val db = WeatherDatabase.getInstance(this)
@@ -78,12 +75,11 @@ class MainActivity : AppCompatActivity() {
                 },
                 { error ->
                     Toast.makeText(this, error.message, Toast.LENGTH_LONG).show()
-                    Single.fromCallable {
+                    Completable.fromCallable {
                         weatherList.addAll(weatherDao?.getAll() ?: ArrayList())
                     }
-                        .subscribeSingleOnIoObserveOnUi()
-                        .doAfterSuccess { adapter.submitList(weatherList) }
-                        .subscribe()
+                        .subscribeCompletableOnIoObserveOnUi()
+                        .subscribe { adapter.submitList(weatherList) }
                 }
             )
     }
