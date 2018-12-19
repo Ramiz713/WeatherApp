@@ -12,13 +12,13 @@ class WeatherInfoActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val weatherItem = intent.getParcelableExtra<WeatherItem>("Weather item")
-        weather_city.text = weatherItem.city
-        weather_descr.text = weatherItem.weather.first().description
-        weather_temp.text = getString(R.string.temperature_metric, weatherItem.forecast.temperature.toString())
-        weather_pressure.text = getString(R.string.pressure, weatherItem.forecast.pressure.toString())
-        weather_humidity.text = getString(R.string.humidity, weatherItem.forecast.pressure.toString())
+        text_city.text = weatherItem.city
+        text_short_descr.text = weatherItem.weather.first().description
+        text_temperature.text = getString(R.string.temperature_metric, weatherItem.forecast.temperature)
+        text_pressure.text = getString(R.string.pressure, weatherItem.forecast.pressure)
+        text_humidity.text = getString(R.string.humidity, weatherItem.forecast.pressure)
         val wind = weatherItem.wind
-        weather_wind_degree.text = getString(R.string.windDegree, wind.degree.toString())
-        weather_wind_speed.text = getString(R.string.windSpeed, wind.speed.toString())
+        text_wind_degree.text = getString(R.string.windDegree, wind.degree)
+        text_wind_speed.text = getString(R.string.windSpeed, wind.speed)
     }
 }

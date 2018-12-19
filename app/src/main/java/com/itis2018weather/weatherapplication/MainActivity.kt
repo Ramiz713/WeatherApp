@@ -12,9 +12,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.itis2018weather.weatherapplication.adapter.WeatherAdapter
+import com.itis2018weather.weatherapplication.database.WeatherDatabase
 import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -62,13 +62,12 @@ class MainActivity : AppCompatActivity() {
         val weatherDao = db?.weatherDao()
         val apiService = WeatherApiService.create(this)
         apiService.getWeatherOfNearCities(currentLatitude, currentLongtitude)
-            .subscribeOn(Schedulers.io())
             .map { it.list }
             .doOnSuccess {
                 weatherDao?.deleteAll()
                 weatherDao?.insertAll(it)
             }
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeSingleOnIoObserveOnUi()
             .subscribe(
                 { result ->
                     weatherList.addAll(result)
@@ -79,8 +78,7 @@ class MainActivity : AppCompatActivity() {
                     Completable.fromCallable {
                         weatherList.addAll(weatherDao?.getAll() ?: ArrayList())
                     }
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
+                        .subscribeCompletableOnIoObserveOnUi()
                         .subscribe { adapter.submitList(weatherList) }
                 }
             )

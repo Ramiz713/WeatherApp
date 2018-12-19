@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Приложение Погода</string>
+    <string name="snack_message">Нам нужна информацию о вашей локации для получения погоды</string>
+    <string name="grant">Разрешение предоставлено</string>
+    <string name="country">Россия</string>
+    <string name="country_code">ru</string>
+    <string name="pressure">Давление: %.1f гПа</string>
+    <string name="humidity">Влажность: %.1f%%</string>
+    <string name="windDegree">Направление ветра: %.1f°</string>
+    <string name="windSpeed">Скорость ветра: %.1f м/с</string>
+</resources>

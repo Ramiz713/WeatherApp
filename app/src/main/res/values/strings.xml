@@ -2,9 +2,11 @@
     <string name="app_name">Weather Application</string>
     <string name="snack_message">We need your location to define the current weather forecast</string>
     <string name="grant">Permission granted</string>
-    <string name="temperature_metric">%1$s°C</string>
-    <string name="pressure">Pressure: %1$s hPa</string>
-    <string name="humidity">Humidity: %1$s%%</string>
-    <string name="windDegree">Wind degree: %1$s°</string>
-    <string name="windSpeed">Wind Speed: %1$s mps</string>
+    <string name="country">Russia</string>
+    <string name="country_code">en</string>
+    <string name="temperature_metric" translatable="false">%1$.2f°C</string>
+    <string name="pressure">Pressure: %.1f hPa</string>
+    <string name="humidity">Humidity: %.1f%%</string>
+    <string name="windDegree">Wind degree: %.1f°</string>
+    <string name="windSpeed">Wind Speed: %.1f mps</string>
 </resources>
