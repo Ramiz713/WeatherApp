@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.gitlab.arturbosch.detekt'
 
 android {
     compileSdkVersion 27
@@ -34,8 +35,26 @@ androidExtensions {
     experimental = true
 }
 
+detekt {
+    version = "1.0.0-RC12"
+    input = files("${project.rootDir}/${project.getName()}/src/main/kotlin")
+    config = files("${project.rootDir}/detekt/detekt-config.yml")
+    filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    reports {
+        xml {
+            enabled = true
+            destination = file("build/reports/detekt.xml")
+        }
+        html {
+            enabled = true
+            destination = file("build/reports/detekt.html")
+        }
+    }
+}
+
 dependencies {
     def room_version = "1.1.1"
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.0.0-RC12"
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:1.1.1"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
