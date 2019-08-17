@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
-import com.itis2018weather.weatherapplication.WeatherItem
+import com.itis2018weather.weatherapplication.entities.WeatherItem
 
 @Database(entities = [WeatherItem::class], version = 1)
 @TypeConverters(WeatherConverter::class)
@@ -23,8 +23,7 @@ abstract class WeatherDatabase : RoomDatabase() {
                     context.applicationContext,
                     WeatherDatabase::class.java,
                     DATABASE_NAME
-                )
-                    .build()
+                ).build()
             }
             return INSTANCE
         }

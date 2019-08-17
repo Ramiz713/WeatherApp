@@ -1,6 +1,9 @@
-package com.itis2018weather.weatherapplication
+package com.itis2018weather.weatherapplication.api
 
 import android.content.Context
+import com.itis2018weather.weatherapplication.BuildConfig
+import com.itis2018weather.weatherapplication.R
+import com.itis2018weather.weatherapplication.entities.WeatherPage
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,7 +17,7 @@ interface WeatherApiService {
     fun getWeatherOfNearCities(
         @Query("lat") latitude: String,
         @Query("lon") longitude: String
-    ): Single<WeatherList>
+    ): Single<WeatherPage>
 
     companion object ApiFactory {
         private const val API_DEFAULT_CITIES_COUNT = "20"

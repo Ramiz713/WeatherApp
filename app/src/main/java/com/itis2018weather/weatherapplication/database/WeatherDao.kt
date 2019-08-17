@@ -4,7 +4,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.TypeConverters
-import com.itis2018weather.weatherapplication.WeatherItem
+import com.itis2018weather.weatherapplication.entities.WeatherItem
 
 @Dao
 @TypeConverters(WeatherConverter::class)
