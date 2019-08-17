@@ -3,7 +3,7 @@ package com.itis2018weather.weatherapplication.database
 import android.arch.persistence.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.itis2018weather.weatherapplication.Weather
+import com.itis2018weather.weatherapplication.entities.Weather
 
 class WeatherConverter {
     @TypeConverter
