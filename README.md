@@ -5,7 +5,7 @@ Simple Weather App uses the OpenWeatherMap API to retrieve weather forecast data
 * Supports two languages: Russian and English
 * Shows 20 cities in cycle by coordinates
 * Shows detailed weather information
-* Caches data and shows them, if haven't net connection
+* Caches data and shows them, if there is not Internet connection
 
 ### Screenshots:
 Lists of cities / RU      | Detailed weather information / RU |
