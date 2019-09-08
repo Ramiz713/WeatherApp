@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Приложение Погода</string>
+    <string name="weather">Погода</string>
     <string name="snack_message">Нам нужна информацию о вашей локации для получения погоды</string>
     <string name="grant">Разрешение предоставлено</string>
     <string name="country">Россия</string>

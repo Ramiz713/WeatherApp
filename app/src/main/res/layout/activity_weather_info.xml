@@ -45,7 +45,6 @@
         android:id="@id/image_weather_icon"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/weather_default"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/text_pressure"
         app:layout_constraintStart_toStartOf="@id/line_left"
