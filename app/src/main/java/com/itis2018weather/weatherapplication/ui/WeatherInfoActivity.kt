@@ -24,7 +24,7 @@ class WeatherInfoActivity : AppCompatActivity() {
         }
         text_temperature.text = getString(R.string.temperature_metric, weatherItem.forecast.temperature)
         text_pressure.text = getString(R.string.pressure, weatherItem.forecast.pressure)
-        text_humidity.text = getString(R.string.humidity, weatherItem.forecast.pressure)
+        text_humidity.text = getString(R.string.humidity, weatherItem.forecast.humidity)
         val wind = weatherItem.wind
         text_wind_degree.text = getString(R.string.windDegree, wind.degree)
         text_wind_speed.text = getString(R.string.windSpeed, wind.speed)

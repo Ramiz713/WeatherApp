@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.WeatherAppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
