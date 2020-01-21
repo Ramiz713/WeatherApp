@@ -49,4 +49,4 @@ jobs:
         with:
           java-version: 1.8
       - name: Detekt Checkstyle
-        run: ./gradlew detekt
+        run: chmod +x ./gradlew detekt
