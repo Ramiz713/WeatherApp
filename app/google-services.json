@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "486537226708",
+    "firebase_url": "https://weatherapp-96278.firebaseio.com",
+    "project_id": "weatherapp-96278",
+    "storage_bucket": "weatherapp-96278.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486537226708:android:2605c1e066e5e332954e41",
+        "android_client_info": {
+          "package_name": "com.itis2018weather.weatherapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486537226708-r4rotn9827g9a4dpi2i2b6g4svqbtsv9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiOhY5DjUvtvRlrcdQcD7DRH31sFsZ58c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486537226708-r4rotn9827g9a4dpi2i2b6g4svqbtsv9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
