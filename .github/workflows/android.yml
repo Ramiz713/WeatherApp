@@ -73,8 +73,8 @@ jobs:
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.1.1
         with:
-          appId: ${{weatherapp-96278}}
-          token: ${{1//0ctnjDXZa7SaYCgYIARAAGAwSNwF-L9IrKHXY2O1_qa9Ivj0MiO2GQhfn3i2vFO9-Gtbub2WpmXVJmXEjhe5jTWPC3EKBJd_faY0}}
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
           groups: testers
           file: app/build/outputs/apk/release/app-release-unsigned.apk
 
