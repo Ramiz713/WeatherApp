@@ -1,10 +1,10 @@
 package com.itis2018weather.weatherapplication.entities
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.TypeConverters
 import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import com.itis2018weather.weatherapplication.database.WeatherConverter
 import kotlinx.android.parcel.Parcelize

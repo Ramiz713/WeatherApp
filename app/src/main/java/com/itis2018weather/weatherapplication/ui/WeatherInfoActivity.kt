@@ -1,7 +1,7 @@
 package com.itis2018weather.weatherapplication.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.itis2018weather.weatherapplication.R
 import com.itis2018weather.weatherapplication.entities.WeatherItem
